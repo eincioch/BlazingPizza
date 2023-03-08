@@ -1,0 +1,27 @@
+﻿@page "/checkout"
+<div class="main">
+    <EditForm Model="ViewModel.Address">
+        <div class="checkout-cols">
+            <div>
+                <h4>Revisar la orden</h4>
+                <OrderReview Order="ViewModel.Order" />
+            </div>
+            <div>
+                <h4>Enviar a...</h4>
+                @if (ViewModel.IsValidAddress.HasValue && 
+                !ViewModel.IsValidAddress.Value)
+                {
+                    <div class="alert alert-danger">Please enter a name and address.</div>
+                }
+                <AddressEditor Address="ViewModel.Address" />
+            </div>
+        </div>
+
+        <button class="checkout-button btn btn-warning"
+                @onclick="PlaceOrder"
+                disabled="@ViewModel.IsSubmitting">
+            Realizar pedido
+        </button>
+    </EditForm>
+</div>
+
